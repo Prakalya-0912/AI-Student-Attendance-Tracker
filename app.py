@@ -1320,10 +1320,17 @@ if __name__ == "__main__":
     print("=" * 65)
     print("AI Student Attendance Tracker - Starting Server...")
     print("=" * 65)
-    
+
     init_db()
     load_ml_model()
-    
-    print("Application running at: http://127.0.0.1:5000")
+
+    port = int(os.environ.get("PORT", 5000))
+
+    print(f"Application running at: http://0.0.0.0:{port}")
     print("=" * 65)
-    app.run(host="127.0.0.1", port=5000, debug=True)
+
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )
