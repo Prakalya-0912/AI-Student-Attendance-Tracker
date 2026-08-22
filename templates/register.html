@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - AI Student Attendance Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+
+<div class="auth-page-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="sidebar-logo-icon" style="margin: 0 auto 12px; width: 48px; height: 48px; font-size: 26px;">🎓</div>
+      <h2>Create Faculty / Staff Account</h2>
+      <p>AI Student Attendance Tracker & Risk Prediction System</p>
+    </div>
+
+    <!-- Academic Disclaimer -->
+    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #1D4ED8; margin-bottom: 20px; line-height: 1.5;">
+      ℹ️ <strong>Academic Demo:</strong> Register as a faculty member or mentor to access attendance monitoring and ML risk analytics.
+    </div>
+
+    <!-- Registration Form -->
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="regFullName" class="form-label">Full Name *</label>
+        <input type="text" id="regFullName" class="form-control" placeholder="e.g. Dr. Kavin Raj" required>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="regUsername" class="form-label">Username *</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="e.g. kavin_faculty" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail" class="form-label">College Email *</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="e.g. kavin@college.edu" required>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="regRole" class="form-label">Academic Role *</label>
+          <select id="regRole" class="form-control" required>
+            <option value="Faculty Advisor">Faculty Advisor</option>
+            <option value="Class Mentor">Class Mentor</option>
+            <option value="Head of Department">Head of Department (HOD)</option>
+            <option value="Academic Dean">Academic Dean</option>
+            <option value="Administrator">Administrator</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="regDepartment" class="form-label">Department *</label>
+          <select id="regDepartment" class="form-control" required>
+            <option value="CSBS">Computer Science & Business Systems (CSBS)</option>
+            <option value="CSE">Computer Science & Engineering (CSE)</option>
+            <option value="AI&DS">Artificial Intelligence & Data Science</option>
+            <option value="IT">Information Technology</option>
+            <option value="ECE">Electronics & Communication</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label for="regPassword" class="form-label">Password * (Min 6 chars)</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="••••••••" minlength="6" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regConfirmPassword" class="form-label">Confirm Password *</label>
+          <input type="password" id="regConfirmPassword" class="form-control" placeholder="••••••••" minlength="6" required>
+        </div>
+      </div>
+
+      <button type="submit" id="registerSubmitBtn" class="btn btn-primary btn-block" style="padding: 12px; font-size: 14.5px; margin-top: 8px;">
+        ✓ Register Faculty Account
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account? <a href="/login" style="font-weight: 700;">Log In Here →</a>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initRegisterPage();
+  });
+</script>
+</body>
+</html>

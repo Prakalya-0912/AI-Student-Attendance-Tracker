@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}About Project - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>ℹ️ About Project: AI Student Attendance Tracker</h3>
+      <p class="card-subtitle">Comprehensive mini-project architecture, machine learning methodology, and database specification</p>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- PROJECT SUMMARY OVERVIEW -->
+    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; margin-bottom: 28px;">
+      <h4 style="color: #0B1220; margin-bottom: 8px; font-size: 16px;">1. Project Overview & Problem Statement</h4>
+      <p style="color: #475569; font-size: 13.5px; line-height: 1.7; margin-bottom: 12px;">
+        Traditional college attendance monitoring systems only record roll calls statically, often leaving faculty and mentors unaware of chronic absenteeism, consecutive missed lectures, or deteriorating attendance trends until semester-end detention lists are compiled.
+      </p>
+      <p style="color: #475569; font-size: 13.5px; line-height: 1.7;">
+        The <strong>AI Student Attendance Tracker</strong> is an intelligent decision-support web application designed to bridge this gap. By utilizing a trained Machine Learning model alongside real-time attendance analytics, the system dynamically calculates attendance percentages, detects consecutive absence patterns, predicts student detention risk, and suggests tailored academic intervention timelines before students fall into critical categories.
+      </p>
+    </div>
+
+    <!-- ML MODEL LIVE METRICS -->
+    <div style="background: linear-gradient(135deg, #0B1220, #152238); color: #FFFFFF; border-radius: 12px; padding: 24px; margin-bottom: 28px; border: 1px solid #1E2E4A;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h4 style="color: #60A5FA; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+          <span>🤖</span> Live Machine Learning Model Performance
+        </h4>
+        <span class="badge badge-safe" style="font-size: 11px;">Production Ready</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">
+        <div style="background: rgba(255, 255, 255, 0.06); padding: 14px; border-radius: 8px;">
+          <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Algorithm</div>
+          <div id="metaModelName" style="font-size: 16px; font-weight: 700; color: #FFFFFF;">Random Forest</div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.06); padding: 14px; border-radius: 8px;">
+          <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Test Accuracy</div>
+          <div id="metaAccuracy" style="font-size: 24px; font-weight: 800; color: #4ADE80;">--%</div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.06); padding: 14px; border-radius: 8px;">
+          <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Training Dataset</div>
+          <div id="metaDatasetSize" style="font-size: 16px; font-weight: 700; color: #FFFFFF;">2500 records</div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.06); padding: 14px; border-radius: 8px;">
+          <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Trained Date</div>
+          <div id="metaTrainedAt" style="font-size: 13px; font-weight: 600; color: #CBD5E1;">--</div>
+        </div>
+      </div>
+
+      <h5 style="color: #94A3B8; font-size: 12.5px; text-transform: uppercase; margin-bottom: 10px;">Model Feature Importances:</h5>
+      <div id="metaFeatureImportances" style="background: rgba(255, 255, 255, 0.04); padding: 16px; border-radius: 8px;">
+        Loading feature weights...
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE & SYSTEM DESIGN -->
+    <div class="dashboard-grid-equal" style="margin-bottom: 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px;">
+        <h4 style="color: #0B1220; margin-bottom: 12px; font-size: 15px;">2. System Architecture Workflow</h4>
+        <div style="font-family: monospace; font-size: 12px; background: #0B1220; color: #38BDF8; padding: 16px; border-radius: 8px; line-height: 1.6;">
+          User / Faculty Browser<br>
+          &nbsp;&nbsp;↓ (Fetch API / JSON Requests)<br>
+          HTML5 + CSS3 + Vanilla JavaScript<br>
+          &nbsp;&nbsp;↓ (REST Endpoints & Jinja2 Templates)<br>
+          Python Flask Application Server (app.py)<br>
+          &nbsp;&nbsp;↓ (Parameterized SQL Queries)<br>
+          SQLite Database (database/attendance.db)<br>
+          &nbsp;&nbsp;↓ (Scikit-Learn Inference Engine)<br>
+          Random Forest Classifier (.pkl)<br>
+          &nbsp;&nbsp;↓ (Composite Metric Formula)<br>
+          Prediction + Explainable Risk Score (0-100)<br>
+          &nbsp;&nbsp;↓<br>
+          Live Dashboard / Alerts / PDF Reports
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px;">
+        <h4 style="color: #0B1220; margin-bottom: 12px; font-size: 15px;">3. Explainable Risk Scoring Formula</h4>
+        <p style="font-size: 13px; color: #475569; line-height: 1.6; margin-bottom: 10px;">
+          The prototype risk metric produces an intuitive <strong>0 to 100 Risk Score</strong> calculated using weighted domain indicators:
+        </p>
+        <div style="background: #F1F5F9; border-left: 3px solid #06B6D4; padding: 12px; font-size: 12px; font-family: monospace; color: #0F172A; border-radius: 4px; margin-bottom: 10px;">
+          Risk = (100 - Attendance) × 0.40<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ min(20, Consecutive_Absences × 5)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (100 - 10Day_Trend) × 0.15<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (100 - Marks) × 0.08<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (100 - Assignments) × 0.07<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (100 - Activity) × 0.10
+        </div>
+        <ul style="font-size: 12px; color: #64748B; margin-left: 16px;">
+          <li><strong>0 – 29 (SAFE):</strong> Regular academic progress.</li>
+          <li><strong>30 – 59 (AT RISK):</strong> Requires mentor review.</li>
+          <li><strong>60 – 100 (CRITICAL):</strong> Immediate detention alert.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TECH STACK & DATABASE SCHEMA -->
+    <div class="dashboard-grid-equal" style="margin-bottom: 24px;">
+      <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px;">
+        <h4 style="color: #0B1220; margin-bottom: 12px; font-size: 15px;">4. Technology Stack</h4>
+        <table class="data-table">
+          <tbody>
+            <tr><td><strong>Frontend</strong></td><td>HTML5, CSS3 (Custom Variables, Flexbox, Grid), Vanilla JS (Fetch API)</td></tr>
+            <tr><td><strong>Backend</strong></td><td>Python Flask (RESTful Architecture, Jinja2)</td></tr>
+            <tr><td><strong>Database</strong></td><td>SQLite (Parameterized Queries, Foreign Key Cascades)</td></tr>
+            <tr><td><strong>AI / ML</strong></td><td>Scikit-learn, Random Forest Classifier, Pandas, NumPy, Joblib</td></tr>
+            <tr><td><strong>Visualizations</strong></td><td>Chart.js via CDN (Live Dynamic Endpoints)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px;">
+        <h4 style="color: #0B1220; margin-bottom: 12px; font-size: 15px;">5. Database Entities (SQLite)</h4>
+        <table class="data-table">
+          <tbody>
+            <tr><td><code>students</code></td><td>id, student_id, name, department, year, section, email, created_at</td></tr>
+            <tr><td><code>subjects</code></td><td>id, subject_code, subject_name, department, year</td></tr>
+            <tr><td><code>attendance</code></td><td>id, student_id, subject_id, date, status, recorded_at</td></tr>
+            <tr><td><code>predictions</code></td><td>id, student_id, features, predicted_condition, confidence, risk_score, recommendation</td></tr>
+            <tr><td><code>alerts</code></td><td>id, student_id, alert_type, message, severity, status, created_at</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LIMITATIONS & DISCLAIMER -->
+    <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 20px; font-size: 13px; color: #92400E; line-height: 1.6;">
+      <h4 style="color: #B45309; margin-bottom: 6px; font-size: 15px;">6. Academic Prototype Disclaimer & Limitations</h4>
+      <p style="margin-bottom: 8px;">
+        <strong>Disclaimer:</strong> This project uses simulated student attendance and academic performance data for educational demonstration. It is designed as an academic decision-support prototype and does not replace official university attendance boards.
+      </p>
+      <p>
+        <strong>Future Enhancements:</strong> Biometric/RFID reader hardware integration, Automated WhatsApp/SMS alerts to parents, and Face recognition-based camera attendance logging.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAboutPage();
+  });
+</script>
+{% endblock %}

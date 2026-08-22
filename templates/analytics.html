@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Attendance Analytics - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<!-- ANALYTICS CHARTS GRID -->
+<div class="dashboard-grid-2">
+  <!-- 1. Attendance Trend Line Chart -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📈 College Attendance Trend</h3>
+        <p class="card-subtitle">Daily overall attendance rate computed dynamically from SQLite</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 300px; position: relative;">
+        <canvas id="analyticsTrendChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Attendance Distribution Doughnut Chart -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>🎯 Student Tier Distribution</h3>
+        <p class="card-subtitle">Classification into Excellent, Good, At Risk, and Critical</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 300px; position: relative;">
+        <canvas id="analyticsDistributionChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-grid-3">
+  <!-- 3. Subject-wise Attendance Bar Chart -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📚 Subject-wise Attendance</h3>
+        <p class="card-subtitle">Comparison across core courses</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 280px; position: relative;">
+        <canvas id="analyticsSubjectChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Present vs Absent Ratio -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>⚖️ Present vs Absent Ratio</h3>
+        <p class="card-subtitle">Aggregate class presence counts</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 280px; position: relative;">
+        <canvas id="analyticsPresentAbsentChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Monthly Attendance Overview -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📅 Monthly Attendance</h3>
+        <p class="card-subtitle">Monthly aggregate percentage</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 280px; position: relative;">
+        <canvas id="analyticsMonthlyChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAnalyticsPage();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Attendance & Risk Reports - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<!-- PRINT HEADER (ONLY VISIBLE DURING PRINT) -->
+<div class="print-header">
+  <h2 style="font-size: 20pt; margin-bottom: 4px;">AI STUDENT ATTENDANCE TRACKER</h2>
+  <p style="font-size: 11pt; color: #555555; margin-bottom: 6px;">Department of Computer Science & Business Systems</p>
+  <p style="font-size: 10pt; font-weight: bold;">Comprehensive Semester Attendance & Risk Assessment Report</p>
+  <p style="font-size: 9pt; color: #777777;">Generated on: <span id="reportGeneratedDate"></span></p>
+</div>
+
+<!-- ACTIONS BAR -->
+<div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+  <div>
+    <h2 style="font-size: 20px; font-weight: 800; color: #0B1220;">Attendance & Risk Assessment Report</h2>
+    <p style="font-size: 13px; color: #64748B;">Comprehensive institutional summary with AI-driven student risk classifications</p>
+  </div>
+  <div style="display: flex; gap: 12px;">
+    <button onclick="initReportsPage()" class="btn btn-secondary">
+      🔄 Refresh Report
+    </button>
+    <button onclick="window.print()" class="btn btn-primary">
+      🖨️ Print / Export PDF
+    </button>
+  </div>
+</div>
+
+<!-- REPORT SUMMARY METRICS CARDS -->
+<div class="metrics-grid">
+  <div class="metric-card card-blue">
+    <div class="metric-header">
+      <span class="metric-title">Total Enrolled</span>
+      <div class="metric-icon">👥</div>
+    </div>
+    <div class="metric-value" id="repTotalStudents">--</div>
+  </div>
+
+  <div class="metric-card card-cyan">
+    <div class="metric-header">
+      <span class="metric-title">Class Average</span>
+      <div class="metric-icon">📊</div>
+    </div>
+    <div class="metric-value" id="repAvgAttendance">--%</div>
+  </div>
+
+  <div class="metric-card card-green">
+    <div class="metric-header">
+      <span class="metric-title">Safe Category</span>
+      <div class="metric-icon">✓</div>
+    </div>
+    <div class="metric-value" id="repSafeCount" style="color: #15803D;">--</div>
+  </div>
+
+  <div class="metric-card card-yellow">
+    <div class="metric-header">
+      <span class="metric-title">At-Risk Category</span>
+      <div class="metric-icon">⚠</div>
+    </div>
+    <div class="metric-value" id="repAtRiskCount" style="color: #B45309;">--</div>
+  </div>
+
+  <div class="metric-card card-red">
+    <div class="metric-header">
+      <span class="metric-title">Critical Category</span>
+      <div class="metric-icon">🚨</div>
+    </div>
+    <div class="metric-value" id="repCriticalCount" style="color: #DC2626;">--</div>
+  </div>
+</div>
+
+<!-- STUDENT ATTENDANCE SUMMARY TABLE -->
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>👨‍🎓 Student Attendance Standings</h3>
+      <p class="card-subtitle">Complete student attendance breakdown and calculated risk status</p>
+    </div>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Department</th>
+            <th>Total Classes</th>
+            <th>Present</th>
+            <th>Absent</th>
+            <th>Attendance %</th>
+            <th>Category</th>
+            <th>AI Status</th>
+          </tr>
+        </thead>
+        <tbody id="reportStudentsBody">
+          <tr>
+            <td colspan="10" style="text-align: center; padding: 25px; color: #64748B;">Generating report data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SUBJECT PERFORMANCE SUMMARY TABLE -->
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>📚 Subject-wise Summary</h3>
+      <p class="card-subtitle">Attendance performance across academic courses</p>
+    </div>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Average Attendance</th>
+            <th>Academic Standing</th>
+          </tr>
+        </thead>
+        <tbody id="reportSubjectsBody">
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 20px; color: #64748B;">Loading subject report data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- INSTITUTIONAL RECOMMENDATIONS & SIGN-OFF (PRINT FRIENDLY) -->
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>📋 Action Guidelines & Administrative Review</h3>
+    </div>
+  </div>
+  <div class="card-body" style="font-size: 13px; color: #334155; line-height: 1.6;">
+    <p><strong>Institutional Attendance Criteria:</strong></p>
+    <ul style="margin-left: 20px; margin-bottom: 16px;">
+      <li>Students with attendance &ge; 75% are permitted for end-semester university examinations.</li>
+      <li>Students with attendance between 60% and 74% require condonation approval and mentor meeting.</li>
+      <li>Students below 60% are placed under critical detention review with mandatory parent consultation.</li>
+    </ul>
+
+    <div style="margin-top: 30px; display: flex; justify-content: space-between; padding-top: 20px;">
+      <div>
+        <div style="border-top: 1px dashed #94A3B8; width: 200px; text-align: center; padding-top: 6px; font-weight: 600;">
+          Class Advisor / Faculty
+        </div>
+      </div>
+      <div>
+        <div style="border-top: 1px dashed #94A3B8; width: 200px; text-align: center; padding-top: 6px; font-weight: 600;">
+          Head of Department
+        </div>
+      </div>
+      <div>
+        <div style="border-top: 1px dashed #94A3B8; width: 200px; text-align: center; padding-top: 6px; font-weight: 600;">
+          Principal / Dean
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initReportsPage();
+  });
+</script>
+{% endblock %}

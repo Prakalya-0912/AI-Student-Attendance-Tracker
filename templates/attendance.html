@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Attendance Management - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid-2">
+  <!-- SINGLE ATTENDANCE FORM -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📝 Single Record Entry</h3>
+        <p class="card-subtitle">Mark individual student attendance for a specific session</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <form id="singleAttendanceForm">
+        <div class="form-group">
+          <label for="attDate" class="form-label">Attendance Date *</label>
+          <input type="date" id="attDate" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="attSubject" class="form-label">Subject / Course *</label>
+          <select id="attSubject" class="form-control" required>
+            <option value="">-- Select Subject --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="singleStudentSelect" class="form-label">Student *</label>
+          <select id="singleStudentSelect" class="form-control" required>
+            <option value="">-- Select Student --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Attendance Status *</label>
+          <div style="display: flex; gap: 20px; margin-top: 6px;">
+            <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: #15803D; cursor: pointer;">
+              <input type="radio" name="singleStatus" value="Present" checked> Present
+            </label>
+            <label style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: #B91C1C; cursor: pointer;">
+              <input type="radio" name="singleStatus" value="Absent"> Absent
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 24px;">
+          ✓ Save Attendance Record
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- BATCH ATTENDANCE MARKER -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📋 Batch Session Attendance</h3>
+        <p class="card-subtitle">Fast roll-call attendance recording for an entire class</p>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button id="markAllPresentBtn" class="btn btn-secondary btn-sm" style="color: #15803D;">✓ All Present</button>
+        <button id="markAllAbsentBtn" class="btn btn-secondary btn-sm" style="color: #B91C1C;">✗ All Absent</button>
+      </div>
+    </div>
+    <div class="card-body" style="padding: 0; max-height: 420px; overflow-y: auto;">
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Student Name</th>
+              <th>Dept</th>
+              <th>Current %</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="batchTableBody">
+            <tr>
+              <td colspan="5" style="text-align: center; color: #64748B; padding: 20px;">Loading student list for batch entry...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="padding: 16px 24px; background: #F8FAFC; border-top: 1px solid #E2E8F0;">
+      <button id="saveBatchAttendanceBtn" class="btn btn-success btn-block">
+        💾 Save All Batch Records
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ATTENDANCE AUDIT LOG TABLE -->
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>🕒 Recent Recorded Sessions</h3>
+      <p class="card-subtitle">Audit trail of recently logged attendance entries stored in SQLite</p>
+    </div>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Recorded At</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceLogBody">
+          <tr>
+            <td colspan="6" style="text-align: center; color: #64748B; padding: 20px;">Loading attendance logs...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAttendancePage();
+  });
+</script>
+{% endblock %}

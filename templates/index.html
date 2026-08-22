@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Overview - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<!-- DASHBOARD METRIC STAT CARDS -->
+<div class="metrics-grid">
+  <div class="metric-card card-blue">
+    <div class="metric-header">
+      <span class="metric-title">Total Students</span>
+      <div class="metric-icon">👥</div>
+    </div>
+    <div class="metric-value" id="statTotalStudents">--</div>
+    <div class="metric-footer">
+      <span>Enrolled across active batches</span>
+    </div>
+  </div>
+
+  <div class="metric-card card-green">
+    <div class="metric-header">
+      <span class="metric-title">Present Today</span>
+      <div class="metric-icon">✓</div>
+    </div>
+    <div class="metric-value" id="statPresentToday" style="color: #15803D;">--</div>
+    <div class="metric-footer">
+      <span>Recorded in latest academic session</span>
+    </div>
+  </div>
+
+  <div class="metric-card card-red">
+    <div class="metric-header">
+      <span class="metric-title">Absent Today</span>
+      <div class="metric-icon">✗</div>
+    </div>
+    <div class="metric-value" id="statAbsentToday" style="color: #B91C1C;">--</div>
+    <div class="metric-footer">
+      <span>Requires follow-up verification</span>
+    </div>
+  </div>
+
+  <div class="metric-card card-cyan">
+    <div class="metric-header">
+      <span class="metric-title">Average Attendance</span>
+      <div class="metric-icon">📊</div>
+    </div>
+    <div class="metric-value" id="statAvgAttendance" style="color: #0284C7;">--%</div>
+    <div class="metric-footer">
+      <span>College-wide average benchmark</span>
+    </div>
+  </div>
+
+  <div class="metric-card card-yellow">
+    <div class="metric-header">
+      <span class="metric-title">Students At Risk</span>
+      <div class="metric-icon">⚠</div>
+    </div>
+    <div class="metric-value" id="statAtRisk" style="color: #B45309;">--</div>
+    <div class="metric-footer">
+      <span>Attendance between 60% – 74%</span>
+    </div>
+  </div>
+
+  <div class="metric-card card-red">
+    <div class="metric-header">
+      <span class="metric-title">Critical Students</span>
+      <div class="metric-icon">🚨</div>
+    </div>
+    <div class="metric-value" id="statCritical" style="color: #DC2626;">--</div>
+    <div class="metric-footer">
+      <span>Attendance below 60%</span>
+    </div>
+  </div>
+</div>
+
+<!-- CHARTS & ATTENTION GRID -->
+<div class="dashboard-grid-2">
+  <!-- Overall Attendance Trends -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📈 Attendance Trend (Recent Sessions)</h3>
+        <p class="card-subtitle">Dynamic daily attendance percentages across departments</p>
+      </div>
+      <a href="/analytics" class="btn btn-secondary btn-sm">Full Analytics →</a>
+    </div>
+    <div class="card-body">
+      <div style="height: 280px; position: relative;">
+        <canvas id="overviewTrendChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Students Requiring Immediate Attention -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>⚠ Priority Attention List</h3>
+        <p class="card-subtitle">Students with low attendance or attendance risk</p>
+      </div>
+      <a href="/alerts" class="btn btn-secondary btn-sm">View Alerts →</a>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Attendance</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="attentionStudentsBody">
+            <tr>
+              <td colspan="4" style="text-align: center; color: #64748B; padding: 20px;">Loading student attention data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECONDARY ROW: SUBJECT ATTENDANCE & RECENT RECORDS -->
+<div class="dashboard-grid-2">
+  <!-- Recent Attendance Logs -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>🕒 Recent Attendance Logs</h3>
+        <p class="card-subtitle">Real-time attendance recordings submitted by faculty</p>
+      </div>
+      <a href="/attendance" class="btn btn-primary btn-sm">+ Mark Attendance</a>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Subject</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Recorded Time</th>
+            </tr>
+          </thead>
+          <tbody id="recentAttendanceBody">
+            <tr>
+              <td colspan="5" style="text-align: center; color: #64748B; padding: 20px;">Loading recent attendance records...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subject-wise Attendance Performance -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>📚 Subject Performance</h3>
+        <p class="card-subtitle">Aggregate attendance rate per core engineering course</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <div style="height: 280px; position: relative;">
+        <canvas id="overviewSubjectChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initDashboard();
+  });
+</script>
+{% endblock %}

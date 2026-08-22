@@ -1,0 +1,35 @@
+{
+    "model_name": "Random Forest Classifier",
+    "algorithm": "RandomForestClassifier",
+    "n_estimators": 120,
+    "max_depth": 9,
+    "features": [
+        "attendance_percentage",
+        "absent_days",
+        "consecutive_absences",
+        "attendance_trend",
+        "internal_marks",
+        "assignment_completion",
+        "activity_score"
+    ],
+    "classes": [
+        "AT_RISK",
+        "CRITICAL",
+        "SAFE"
+    ],
+    "dataset_size": 2500,
+    "train_samples": 2000,
+    "test_samples": 500,
+    "test_accuracy": 99.4,
+    "feature_importances": {
+        "attendance_percentage": 0.3543,
+        "absent_days": 0.2868,
+        "consecutive_absences": 0.1598,
+        "attendance_trend": 0.1027,
+        "internal_marks": 0.0407,
+        "assignment_completion": 0.0427,
+        "activity_score": 0.0131
+    },
+    "trained_at": "2026-08-22 23:12:41",
+    "status": "Production Ready"
+}

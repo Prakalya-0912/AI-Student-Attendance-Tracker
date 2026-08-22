@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}AI Attendance Risk Prediction - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid-2">
+  <!-- AI PREDICTION INPUT FORM -->
+  <div class="content-card">
+    <div class="card-header-bar">
+      <div>
+        <h3>🤖 AI Attendance Risk Prediction</h3>
+        <p class="card-subtitle">Scikit-Learn Random Forest Classifier & Multi-Metric Risk Engine</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Auto Fill Dropdown -->
+      <div class="form-group" style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 12px 16px; border-radius: 8px;">
+        <label for="predictStudentSelect" class="form-label" style="color: #1D4ED8;">⚡ Quick Auto-Fill From Enrolled Student Profile</label>
+        <select id="predictStudentSelect" class="form-control">
+          <option value="">-- Or Select Existing Student to Auto-fill --</option>
+        </select>
+      </div>
+
+      <form id="aiPredictionForm">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="inAttendancePct" class="form-label">Attendance Percentage (0–100%) *</label>
+            <input type="number" id="inAttendancePct" class="form-control" min="0" max="100" step="0.1" value="65.0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inAbsentDays" class="form-label">Total Absent Days *</label>
+            <input type="number" id="inAbsentDays" class="form-control" min="0" max="100" value="12" required>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="inConsecutive" class="form-label">Consecutive Absences (Current Streak) *</label>
+            <input type="number" id="inConsecutive" class="form-control" min="0" max="30" value="3" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inTrend" class="form-label">Attendance Trend (Recent 10-Day %) *</label>
+            <input type="number" id="inTrend" class="form-control" min="0" max="100" step="0.1" value="60.0" required>
+          </div>
+        </div>
+
+        <div class="form-grid-3">
+          <div class="form-group">
+            <label for="inMarks" class="form-label">Internal Marks (0–100) *</label>
+            <input type="number" id="inMarks" class="form-control" min="0" max="100" step="0.1" value="68.0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inAssignments" class="form-label">Assignment Completion (%) *</label>
+            <input type="number" id="inAssignments" class="form-control" min="0" max="100" step="0.1" value="70.0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="inActivity" class="form-label">Activity Score (0–100) *</label>
+            <input type="number" id="inActivity" class="form-control" min="0" max="100" step="0.1" value="65.0" required>
+          </div>
+        </div>
+
+        <button type="submit" id="predictSubmitBtn" class="btn btn-primary btn-block" style="margin-top: 10px; padding: 12px; font-size: 15px;">
+          🤖 Analyze Student Risk
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- AI RESULT PANEL -->
+  <div>
+    <div id="aiResultContainer" class="ai-result-panel" style="display: none;">
+      <div class="ai-badge-header">
+        <div>
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B;">AI Prediction Condition</span>
+          <div id="resCondition" class="ai-pred-condition">--</div>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #64748B;">Model Confidence</span>
+          <div id="resConfidence" style="font-size: 20px; font-weight: 800; color: #0B1220;">--%</div>
+        </div>
+      </div>
+
+      <!-- Metrics Row -->
+      <div class="ai-metrics-row">
+        <div class="ai-metric-box">
+          <div class="ai-metric-label">Explainable Risk Score</div>
+          <div id="resRiskScore" class="ai-metric-val">-- / 100</div>
+        </div>
+        <div class="ai-metric-box">
+          <div class="ai-metric-label">Priority Level</div>
+          <div id="resPriority" class="ai-metric-val" style="font-size: 17px;">--</div>
+        </div>
+        <div class="ai-metric-box">
+          <div class="ai-metric-label">Intervention Required</div>
+          <div id="resIntervention" class="ai-metric-val" style="font-size: 17px;">--</div>
+        </div>
+      </div>
+
+      <!-- Suggested Timeline -->
+      <div style="margin-bottom: 16px; font-size: 12.5px; color: #475569;">
+        <strong>Suggested Action Timeline:</strong> <span id="resTimeline">--</span>
+      </div>
+
+      <!-- Recommendation Box -->
+      <div class="ai-recommendation-box">
+        <div class="ai-rec-title">
+          <span>💡</span> Recommended Action Plan
+        </div>
+        <p id="resRecommendation" class="ai-rec-text">--</p>
+        <ul id="resActionList" class="ai-action-list"></ul>
+      </div>
+    </div>
+
+    <!-- Default Helper Box when no prediction is active yet -->
+    <div class="content-card" style="margin-top: 0;">
+      <div class="card-header-bar">
+        <h3>ℹ️ About the Prediction Engine</h3>
+      </div>
+      <div class="card-body" style="font-size: 13px; color: #475569; line-height: 1.6;">
+        <p style="margin-bottom: 12px;">
+          The Attendance Risk Engine uses an ensemble <strong>Random Forest Classifier</strong> trained on historical academic records. It simultaneously analyzes attendance deficits, streak lengths, recent trend changes, and academic performance markers.
+        </p>
+        <div style="background: #F8FAFC; border-left: 3px solid #2563EB; padding: 10px 14px; border-radius: 4px; font-size: 12px;">
+          <strong>Risk Score Classification:</strong><br>
+          • <strong>0 – 29:</strong> SAFE (Regular monitoring)<br>
+          • <strong>30 – 59:</strong> AT RISK (Faculty discussion & weekly goals)<br>
+          • <strong>60 – 100:</strong> CRITICAL (Urgent mentor intervention & notice)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORICAL AI PREDICTIONS LOG -->
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>🕒 Recent AI Assessment History</h3>
+      <p class="card-subtitle">Log of student risk analyses stored in SQLite</p>
+    </div>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Attendance %</th>
+            <th>Consecutive Absences</th>
+            <th>AI Condition</th>
+            <th>Risk Score</th>
+            <th>Confidence</th>
+            <th>Assessed At</th>
+          </tr>
+        </thead>
+        <tbody id="predictionHistoryBody">
+          <tr>
+            <td colspan="7" style="text-align: center; color: #64748B; padding: 20px;">Loading prediction records...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initPredictionPage();
+  });
+</script>
+{% endblock %}

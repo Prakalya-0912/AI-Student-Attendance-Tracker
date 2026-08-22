@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}System Alerts - AI Student Attendance Tracker{% endblock %}
+
+{% block content %}
+<div class="content-card">
+  <div class="card-header-bar">
+    <div>
+      <h3>⚠ Automated Attendance Alerts</h3>
+      <p class="card-subtitle">Real-time alerts triggered by low attendance thresholds, consecutive absences, and AI risk spikes</p>
+    </div>
+    <div>
+      <span class="badge badge-warning" style="font-size: 13px; padding: 6px 14px;">
+        Active Alerts: <strong id="alertsTotalCount" style="margin-left: 4px;">--</strong>
+      </span>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <!-- FILTER BAR -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <label for="alertSeverityFilter" style="font-size: 12.5px; font-weight: 600; color: #64748B;">Severity:</label>
+        <select id="alertSeverityFilter" class="form-control" style="width: auto; min-width: 140px;">
+          <option value="">All Severities</option>
+          <option value="CRITICAL">Critical</option>
+          <option value="WARNING">Warning</option>
+          <option value="INFO">Info</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <label for="alertStatusFilter" style="font-size: 12.5px; font-weight: 600; color: #64748B;">Status:</label>
+        <select id="alertStatusFilter" class="form-control" style="width: auto; min-width: 140px;">
+          <option value="ACTIVE">Active Only</option>
+          <option value="RESOLVED">Resolved Only</option>
+          <option value="ALL">All Alerts</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ALERTS DATA TABLE -->
+    <div class="table-responsive">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Alert ID</th>
+            <th>Student</th>
+            <th>Alert Type</th>
+            <th>Severity</th>
+            <th>Message & Recommended Action</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="alertsTableBody">
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 30px; color: #64748B;">Loading system alerts...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAlertsPage();
+  });
+</script>
+{% endblock %}
