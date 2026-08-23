@@ -94,6 +94,9 @@ AI Student Attendance Tracker is deployed online using Render.
 
 https://ai-student-attendance-tracker.onrender.com
 
+Demo video
+https://drive.google.com/file/d/1Ctsg0cEpJrEXSfbv5ClEJKwFiXFvwrkZ/view?usp=sharing
+
 ## 8. System Architecture
 
 ```text
