@@ -3,95 +3,474 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Register - AI Student Attendance Tracker</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body class="auth-body">
 
 <div class="auth-page-container">
   <div class="auth-card">
+
+    <!-- HEADER -->
     <div class="auth-header">
-      <div class="sidebar-logo-icon" style="margin: 0 auto 12px; width: 48px; height: 48px; font-size: 26px;">🎓</div>
+
+      <div class="sidebar-logo-icon"
+           style="margin: 0 auto 12px;
+                  width: 48px;
+                  height: 48px;
+                  font-size: 26px;">
+        🎓
+      </div>
+
       <h2>Create Faculty / Staff Account</h2>
-      <p>AI Student Attendance Tracker & Risk Prediction System</p>
+
+      <p>
+        AI Student Attendance Tracker & Risk Prediction System
+      </p>
+
     </div>
 
-    <!-- Academic Disclaimer -->
-    <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #1D4ED8; margin-bottom: 20px; line-height: 1.5;">
-      ℹ️ <strong>Academic Demo:</strong> Register as a faculty member or mentor to access attendance monitoring and ML risk analytics.
+
+    <!-- DISCLAIMER -->
+    <div style="
+      background:#EFF6FF;
+      border:1px solid #BFDBFE;
+      border-radius:8px;
+      padding:10px 14px;
+      font-size:12px;
+      color:#1D4ED8;
+      margin-bottom:20px;
+      line-height:1.5;
+    ">
+
+      ℹ️ <strong>Academic Demo:</strong>
+      Register as a faculty member or mentor to access
+      attendance monitoring and ML risk analytics.
+
     </div>
 
-    <!-- Registration Form -->
+
+    <!-- REGISTER FORM -->
     <form id="registerForm">
+
+      <!-- FULL NAME -->
       <div class="form-group">
-        <label for="regFullName" class="form-label">Full Name *</label>
-        <input type="text" id="regFullName" class="form-control" placeholder="e.g. Dr. Kavin Raj" required>
+
+        <label for="regFullName" class="form-label">
+          Full Name *
+        </label>
+
+        <input
+          type="text"
+          id="regFullName"
+          class="form-control"
+          placeholder="e.g. Dr. Kavin Raj"
+          required
+        >
+
       </div>
 
+
+      <!-- USERNAME + EMAIL -->
       <div class="form-grid-2">
-        <div class="form-group">
-          <label for="regUsername" class="form-label">Username *</label>
-          <input type="text" id="regUsername" class="form-control" placeholder="e.g. kavin_faculty" required>
-        </div>
 
         <div class="form-group">
-          <label for="regEmail" class="form-label">College Email *</label>
-          <input type="email" id="regEmail" class="form-control" placeholder="e.g. kavin@college.edu" required>
+
+          <label for="regUsername" class="form-label">
+            Username *
+          </label>
+
+          <input
+            type="text"
+            id="regUsername"
+            class="form-control"
+            placeholder="e.g. kavin_faculty"
+            required
+          >
+
         </div>
+
+
+        <div class="form-group">
+
+          <label for="regEmail" class="form-label">
+            College Email *
+          </label>
+
+          <input
+            type="email"
+            id="regEmail"
+            class="form-control"
+            placeholder="e.g. kavin@college.edu"
+            required
+          >
+
+        </div>
+
       </div>
 
+
+      <!-- ROLE + DEPARTMENT -->
       <div class="form-grid-2">
+
         <div class="form-group">
-          <label for="regRole" class="form-label">Academic Role *</label>
-          <select id="regRole" class="form-control" required>
-            <option value="Faculty Advisor">Faculty Advisor</option>
-            <option value="Class Mentor">Class Mentor</option>
-            <option value="Head of Department">Head of Department (HOD)</option>
-            <option value="Academic Dean">Academic Dean</option>
-            <option value="Administrator">Administrator</option>
+
+          <label for="regRole" class="form-label">
+            Academic Role *
+          </label>
+
+          <select
+            id="regRole"
+            class="form-control"
+            required
+          >
+
+            <option value="Faculty Advisor">
+              Faculty Advisor
+            </option>
+
+            <option value="Class Mentor">
+              Class Mentor
+            </option>
+
+            <option value="Head of Department">
+              Head of Department (HOD)
+            </option>
+
+            <option value="Academic Dean">
+              Academic Dean
+            </option>
+
+            <option value="Administrator">
+              Administrator
+            </option>
+
           </select>
+
         </div>
 
+
         <div class="form-group">
-          <label for="regDepartment" class="form-label">Department *</label>
-          <select id="regDepartment" class="form-control" required>
-            <option value="CSBS">Computer Science & Business Systems (CSBS)</option>
-            <option value="CSE">Computer Science & Engineering (CSE)</option>
-            <option value="AI&DS">Artificial Intelligence & Data Science</option>
-            <option value="IT">Information Technology</option>
-            <option value="ECE">Electronics & Communication</option>
+
+          <label for="regDepartment" class="form-label">
+            Department *
+          </label>
+
+          <select
+            id="regDepartment"
+            class="form-control"
+            required
+          >
+
+            <option value="CSBS">
+              Computer Science & Business Systems (CSBS)
+            </option>
+
+            <option value="CSE">
+              Computer Science & Engineering (CSE)
+            </option>
+
+            <option value="AI&DS">
+              Artificial Intelligence & Data Science
+            </option>
+
+            <option value="IT">
+              Information Technology
+            </option>
+
+            <option value="ECE">
+              Electronics & Communication
+            </option>
+
           </select>
+
         </div>
+
       </div>
 
+
+      <!-- PASSWORD -->
       <div class="form-grid-2">
-        <div class="form-group">
-          <label for="regPassword" class="form-label">Password * (Min 6 chars)</label>
-          <input type="password" id="regPassword" class="form-control" placeholder="••••••••" minlength="6" required>
-        </div>
 
         <div class="form-group">
-          <label for="regConfirmPassword" class="form-label">Confirm Password *</label>
-          <input type="password" id="regConfirmPassword" class="form-control" placeholder="••••••••" minlength="6" required>
+
+          <label for="regPassword" class="form-label">
+            Password * (Min 6 chars)
+          </label>
+
+          <input
+            type="password"
+            id="regPassword"
+            class="form-control"
+            placeholder="••••••••"
+            minlength="6"
+            required
+          >
+
         </div>
+
+
+        <div class="form-group">
+
+          <label for="regConfirmPassword" class="form-label">
+            Confirm Password *
+          </label>
+
+          <input
+            type="password"
+            id="regConfirmPassword"
+            class="form-control"
+            placeholder="••••••••"
+            minlength="6"
+            required
+          >
+
+        </div>
+
       </div>
 
-      <button type="submit" id="registerSubmitBtn" class="btn btn-primary btn-block" style="padding: 12px; font-size: 14.5px; margin-top: 8px;">
+
+      <!-- SUBMIT BUTTON -->
+      <button
+        type="submit"
+        id="registerSubmitBtn"
+        class="btn btn-primary btn-block"
+        style="
+          padding:12px;
+          font-size:14.5px;
+          margin-top:8px;
+        "
+      >
         ✓ Register Faculty Account
       </button>
+
     </form>
 
+
+    <!-- FOOTER -->
     <div class="auth-footer">
-      Already have an account? <a href="/login" style="font-weight: 700;">Log In Here →</a>
+
+      Already have an account?
+
+      <a
+        href="/login"
+        style="font-weight:700;"
+      >
+        Log In Here →
+      </a>
+
     </div>
+
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<!--
+  IMPORTANT:
+  We are NOT using initRegisterPage() here.
+  Registration is handled directly in this page.
+-->
+
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    initRegisterPage();
-  });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const registerButton =
+        document.getElementById("registerSubmitBtn");
+
+
+    registerForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+
+        // Get values
+        const name =
+            document.getElementById("regFullName").value.trim();
+
+        const username =
+            document.getElementById("regUsername").value.trim();
+
+        const email =
+            document.getElementById("regEmail").value.trim();
+
+        const role =
+            document.getElementById("regRole").value;
+
+        const department =
+            document.getElementById("regDepartment").value;
+
+        const password =
+            document.getElementById("regPassword").value;
+
+        const confirmPassword =
+            document.getElementById("regConfirmPassword").value;
+
+
+        // Validate password
+        if (password.length < 6) {
+
+            alert("Password must contain at least 6 characters.");
+
+            return;
+        }
+
+
+        // Confirm password
+        if (password !== confirmPassword) {
+
+            alert("Passwords do not match.");
+
+            return;
+        }
+
+
+        // Disable button
+        registerButton.disabled = true;
+
+        registerButton.innerText =
+            "Creating Account...";
+
+
+        try {
+
+            /*
+             * IMPORTANT:
+             * Use the same Render domain.
+             *
+             * We intentionally use /api/register
+             * instead of localhost.
+             */
+
+            const response = await fetch("/api/register", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+
+                credentials: "same-origin",
+
+                body: JSON.stringify({
+
+                    name: name,
+
+                    username: username,
+
+                    email: email,
+
+                    role: role,
+
+                    department: department,
+
+                    password: password
+
+                })
+
+            });
+
+
+            /*
+             * First read the response as TEXT.
+             *
+             * This prevents:
+             *
+             * Unexpected token '<'
+             *
+             * when Render returns HTML.
+             */
+
+            const responseText =
+                await response.text();
+
+
+            let result;
+
+
+            try {
+
+                result =
+                    JSON.parse(responseText);
+
+            } catch (jsonError) {
+
+                console.error(
+                    "Server returned non-JSON response:",
+                    responseText
+                );
+
+
+                throw new Error(
+                    "Server returned an unexpected response. " +
+                    "Please check the Render deployment."
+                );
+
+            }
+
+
+            // Registration successful
+            if (response.ok && result.success) {
+
+                alert(
+                    "Registration successful! 🎉\n\n" +
+                    "Your faculty account has been created.\n" +
+                    "You can now login with your username and password."
+                );
+
+
+                // Redirect to login
+                window.location.href = "/login";
+
+                return;
+            }
+
+
+            // Server-side validation error
+            alert(
+                result.error ||
+                result.message ||
+                "Registration failed. Please try again."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Registration Error:",
+                error
+            );
+
+
+            alert(
+                "Registration failed.\n\n" +
+                error.message
+            );
+
+
+        } finally {
+
+            registerButton.disabled = false;
+
+            registerButton.innerText =
+                "✓ Register Faculty Account";
+
+        }
+
+    });
+
+});
+
 </script>
+
 </body>
 </html>
