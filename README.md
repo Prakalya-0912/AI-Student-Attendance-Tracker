@@ -92,7 +92,7 @@ In traditional college attendance systems:
 
 AI Student Attendance Tracker is deployed online using Render.
 
-https://ai-student-attendance-tracker-v24t.onrender.com
+https://ai-student-attendance-tracker.onrender.com
 
 ## 8. System Architecture
 
